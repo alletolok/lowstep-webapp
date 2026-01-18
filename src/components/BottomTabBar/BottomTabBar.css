@@ -1,0 +1,59 @@
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 64px;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+
+  /* 🔥 ТЁМНЫЙ ФОН */
+  background: rgba(20, 20, 22, 0.88);
+
+  /* 🔥 БЛЮР КАК В TG / iOS */
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  /* 🔥 ТОНКАЯ ГРАНИЦА СВЕРХУ */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  z-index: 50;
+}
+
+.tab {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  border-radius: 14px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tab.active {
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.label {
+  line-height: 1;
+}

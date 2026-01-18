@@ -1,0 +1,36 @@
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  height: 44px;
+  padding: 0 14px;
+
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* ВАЖНО: убираем любую левую/странную тень */
+  box-shadow: none;
+}
+
+.searchIcon {
+  opacity: 0.7;
+  font-size: 14px;
+  user-select: none;
+}
+
+.searchInput {
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}

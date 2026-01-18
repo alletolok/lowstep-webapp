@@ -1,0 +1,34 @@
+:root {
+  --topbar-h: 64px;
+  --tabbar-h: 72px;
+
+  --bg: #2b2b2f;
+  --card: rgba(255, 255, 255, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.appShell {
+  height: 100%;
+  background: var(--bg);
+}
+
+.appContent {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  padding-top: var(--topbar-h);
+  padding-bottom: var(--tabbar-h);
+}

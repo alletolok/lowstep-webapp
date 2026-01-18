@@ -1,0 +1,112 @@
+    :root {
+  /* ПОДСТРОЙКА: высота верхней панели */
+  --topbar-h: 56px;
+  /* высота поиска (мы её знаем) */
+  --search-h: 44px;
+
+  --tabs-h: 64px;
+  --page-pad: 16px;
+
+  --text: rgba(255, 255, 255, 0.92);
+}
+
+.home {
+  /* ✅ делаем место под fixed поиск */
+  padding-top: calc(var(--topbar-h) + 6px + var(--search-h));
+
+  /* ✅ место под таббар */
+  padding-bottom: calc(var(--tabs-h) + 18px);
+}
+
+/* SEARCH */
+.home__searchBar {
+  /* ✅ ЖЕЛЕЗНО: всегда на месте */
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  /* ✅ вот тут регулируется “вверх/вниз” */
+  top: calc(var(--topbar-h) + 6px);
+
+  z-index: 9999;
+
+  /* твои отступы */
+  padding: 10px var(--page-pad) 12px;
+
+  /* чтобы не было лишней “полосы”/фона */
+  background: transparent;
+  pointer-events: none; /* важно */
+}
+
+.home__searchInner {
+  /* возвращаем клики */
+  pointer-events: auto;
+
+  height: var(--search-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 14px;
+  border-radius: 14px;
+
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  /* ✅ убираем “лишнюю тень” */
+  box-shadow: none;
+}
+
+.home__searchIcon {
+  opacity: 0.8;
+  font-size: 16px;
+  user-select: none;
+}
+
+.home__searchInput {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+
+  color: var(--text);
+  font-size: 14px;
+}
+
+.home__searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* GRID */
+.home__grid {
+  display: grid;
+  gap: 14px;
+  padding: 0 var(--page-pad) var(--page-pad);
+  
+  margin-top: -29px;
+}
+
+/* Mobile / Telegram */
+@media (max-width: 640px) {
+  .home__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop: меньше карточки, больше колонок */
+@media (min-width: 641px) {
+  .home__grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .home__grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
