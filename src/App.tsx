@@ -1,40 +1,40 @@
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+import { useEffect, useState } from 'react';
+import TopBar from './components/TopBar/TopBar';
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+type TgUser = {
+  id?: number;
+  first_name?: string;
+  username?: string;
+  photo_url?: string;
+};
 
-  padding: 10px 14px;
-  background: transparent;
+function App() {
+  const [user, setUser] = useState<TgUser | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const tg = (window as any)?.Telegram?.WebApp;
+    if (!tg) return;
+
+    const tgUser = tg.initDataUnsafe?.user;
+
+    if (tgUser) {
+      setUser({
+        id: tgUser.id,
+        first_name: tgUser.first_name,
+        username: tgUser.username,
+        photo_url: tgUser.photo_url,
+      });
+    }
+  }, []);
+
+  return (
+    <>
+      <TopBar user={user} />
+      {/* остальной UI */}
+    </>
+  );
 }
 
-.topbar__profile {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 6px 14px;
-  border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.topbar__profile img {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-}
-
-.topbar__icon {
-  background: none;
-  border: none;
-  font-size: 18px;
-  opacity: 0.8;
-}
+export default App;
