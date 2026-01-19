@@ -1,20 +1,24 @@
+// src/data/products.ts
+
 export type Product = {
   id: string;
   title: string;
   price: number;
   images: string[];
   sizes: number[];
-  description?: string;
 };
 
-const baseProducts: Omit<Product, "id">[] = [
+// базовые товары
+const baseProducts: Product[] = [
   {
+    id: "adidas-samba-og",
     title: "Adidas Samba OG",
-    price: 14290,
+    price: 8990,
     images: ["/products/AdidasSambaOG.png"],
     sizes: [40, 41, 42, 43, 44],
   },
   {
+    id: "air-jordan-1",
     title: "Air Jordan 1",
     price: 14990,
     images: [
@@ -26,55 +30,41 @@ const baseProducts: Omit<Product, "id">[] = [
     sizes: [41, 42, 43, 44],
   },
   {
+    id: "asics-gel-nyc",
     title: "ASICS GEL-NYC",
-    price: 19990,
+    price: 13290,
     images: [
       "/products/AsicsGEL-NYC.png",
       "/products/AsicsGEL-NYC(2).png",
       "/products/AsicsGEL-NYC(3).png",
     ],
-    sizes: [40, 41, 42, 43, 44, 45],
+    sizes: [40, 41, 42, 43, 44],
   },
   {
-    title: "Nike Zoom Vomero 5",
-    price: 20890,
+    id: "nike-zoom-vomero",
+    title: "Nike Zoom Vomero",
+    price: 16290,
     images: [
       "/products/NikeZoomVomero.png",
       "/products/NikeZoomVomero(3).png",
       "/products/NikeZoomVomero(2).png",
     ],
-    sizes: [40, 41, 42, 43, 44, 45],
+    sizes: [40, 41, 42, 43, 44],
   },
   {
+    id: "nike-air-max-90",
     title: "Nike Air Max 90",
     price: 15890,
     images: ["/products/NikeAirMax90.png"],
-    sizes: [40, 41, 42, 43, 44, 45],
+    sizes: [40, 41, 42, 43, 44],
   },
 ];
 
-// сколько раз дублируем (можешь поставить 4-6)
-const COPIES = 4;
-
-export const products: Product[] = Array.from({ length: COPIES }, (_, copyIdx) =>
-  baseProducts.map((p, baseIdx) => ({
-    id: `${copyIdx}-${baseIdx}-${p.title.toLowerCase().replace(/\s+/g, "-")}`,
-    ...p,
-  }))
-).flat();
-
-    price: 15890,
-    images: ["/products/NikeAirMax90.png"],
-    sizes: [40, 41, 42, 43, 44, 45],
-  },
-];
-
-// сколько раз дублируем (можешь поставить 4-6)
-const COPIES = 4;
-
-export const products: Product[] = Array.from({ length: COPIES }, (_, copyIdx) =>
-  baseProducts.map((p, baseIdx) => ({
-    id: `${copyIdx}-${baseIdx}-${p.title.toLowerCase().replace(/\s+/g, "-")}`,
-    ...p,
-  }))
-).flat();
+// 👉 дублируем для нормального скролла
+export const products: Product[] = Array.from({ length: 4 }).flatMap(
+  (_, i) =>
+    baseProducts.map((p) => ({
+      ...p,
+      id: ${p.id}-${i},
+    }))
+);
