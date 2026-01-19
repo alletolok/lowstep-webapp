@@ -1,33 +1,40 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Cart from "./pages/Cart/Cart";
-import Favorites from "./pages/Favorites/Favorites";
-import Payment from "./pages/Payment/Payment";
-import Profile from "./pages/Profile/Profile";
-import Product from "./pages/Product/Product";
-
-import BottomNav from "./components/BottomNav/BottomNav";
-import TopBar from "./components/TopBar/TopBar";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import "./App.css";
 
+import TopBar from "./components/TopBar/TopBar";
+import BottomTabBar from "./components/BottomTabBar/BottomTabBar";
+
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
+import Cart from "./pages/Cart";
+import Reviews from "./pages/Reviews";
+import Checkout from "./pages/Checkout";
+
+import { initTelegram } from "./utils/telegram";
+
 export default function App() {
+  useEffect(() => {
+    initTelegram();
+  }, []);
+
   return (
-    <Router>
-      <TopBar />
+    <BrowserRouter>
+      <div className="appShell">
+        <TopBar />
 
-      <main className="app">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/product/:id" element={<Product />} />
-        </Routes>
-      </main>
+        <main className="appContent">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </main>
 
-      <BottomNav />
-    </Router>
+        <BottomTabBar />
+      </div>
+    </BrowserRouter>
   );
 }
