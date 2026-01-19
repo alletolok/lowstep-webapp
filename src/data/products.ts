@@ -1,5 +1,11 @@
 export const baseProducts: Product[] = [
   {
+export type Product = {
+  id: string;
+  title: string;
+  price: number;
+  images: string[];
+};
     id: 1,
     title: "Adidas Samba OG",
     price: 8990,
