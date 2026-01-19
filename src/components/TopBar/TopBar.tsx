@@ -1,88 +1,76 @@
+// src/components/TopBar/TopBar.tsx
+
 import "./TopBar.css";
-import { useEffect, useMemo, useState } from "react";
-import { getTelegramUser, initTelegram, type TgUser } from "../../utils/telegram";
-import { useLocation, useNavigate } from "react-router-dom";
+import type { TgUser } from "../../utils/telegram";
+import { getUserAvatarUrl, getUserDisplayName } from "../../utils/telegram";
 
-export default function TopBar() {
-  const nav = useNavigate();
-  const location = useLocation();
+type Props = {
+  user: TgUser | null;
+};
 
-  const [user, setUser] = useState<TgUser | null>(null);
+function IconSupport() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 2a7 7 0 0 0-7 7v5a3 3 0 0 0 3 3h1v-2H8a1 1 0 0 1-1-1V9a5 5 0 0 1 10 0v5a1 1 0 0 1-1 1h-1v2h1a3 3 0 0 0 3-3V9a7 7 0 0 0-7-7Zm-4 18a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2H8v2Z"
+      />
+    </svg>
+  );
+}
 
-  useEffect(() => {
-    initTelegram();
-    setUser(getTelegramUser());
-  }, []);
+function IconReviews() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 17.3l-5.5 3 1-6.2-4.5-4.4 6.2-.9L12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2-5.5-3Z"
+      />
+    </svg>
+  );
+}
 
-  const display = useMemo(() => {
-    const first = user?.first_name?.trim() ?? "";
-    const last = user?.last_name?.trim() ?? "";
-    const fullName = `${first} ${last}`.trim();
-
-    const title = fullName || (user?.username ? user.username : "Пользователь");
-    const subtitle = user?.username ? `@${user.username}` : "";
-
-    const initials = (
-      (first?.[0] ?? "") +
-      (last?.[0] ?? first?.[1] ?? "")
-    ).toUpperCase();
-
-    return {
-      title,
-      subtitle,
-      photoUrl: user?.photo_url ?? "",
-      initials: initials || "U",
-    };
-  }, [user]);
-
-  // если захочешь скрывать таббар на карточке товара — это отдельная логика
-  const isOnReviews = location.pathname === "/reviews";
+export default function TopBar({ user }: Props) {
+  const name = getUserDisplayName(user);
+  const avatarUrl = getUserAvatarUrl(user);
+  const letter = (name.replace("@", "").trim()[0] || "U").toUpperCase();
 
   return (
-    <header className="topbar">
-      <button
-        className="tbIconBtn"
-        type="button"
-        onClick={() => nav("/profile")}
-        aria-label="Поддержка"
-      >
-        {/* headset icon */}
-        <svg width="20" height="20" viewBox="0 0 24 24" className="tbIcon">
-          <path
-            d="M4 12a8 8 0 0 1 16 0v6a2 2 0 0 1-2 2h-2v-6h4v-2a6 6 0 1 0-12 0v2h4v6H6a2 2 0 0 1-2-2v-6z"
-            fill="currentColor"
-          />
-        </svg>
+    <div className="topbar">
+      <button className="topbar__iconBtn" type="button" aria-label="Поддержка">
+        <IconSupport />
       </button>
 
-      <div className="tbUserPill" aria-label="Пользователь">
-        <div className="tbAvatarWrap">
-          {display.photoUrl ? (
-            <img className="tbAvatarImg" src={display.photoUrl} alt="avatar" />
-          ) : (
-            <div className="tbAvatarFallback">{display.initials}</div>
-          )}
+      <div className="topbar__profilePill" role="button" aria-label="Профиль">
+        <div className="topbar__avatar">
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt=""
+              loading="eager"
+              decoding="async"
+              onError={(e) => {
+                // если userpic не нашёлся — убираем img и покажем букву
+                const img = e.currentTarget;
+                img.style.display = "none";
+              }}
+            />
+          ) : null}
+          <span className="topbar__avatarLetter">{letter}</span>
         </div>
 
-        <div className="tbUserText">
-          <div className="tbUserTitle">{display.title}</div>
-          {display.subtitle ? <div className="tbUserSub">{display.subtitle}</div> : null}
+        <div className="topbar__name" title={name}>
+          {name}
         </div>
       </div>
 
-      <button
-        className={`tbIconBtn ${isOnReviews ? "isActive" : ""}`}
-        type="button"
-        onClick={() => nav("/reviews")}
-        aria-label="Отзывы"
-      >
-        {/* star icon */}
-        <svg width="20" height="20" viewBox="0 0 24 24" className="tbIcon">
-          <path
-            d="M12 17.3 6.8 20l1-5.8L3.6 9.9l5.9-.9L12 3.7l2.5 5.3 5.9.9-4.2 4.3 1 5.8z"
-            fill="currentColor"
-          />
-        </svg>
+      <button className="topbar__iconBtn" type="button" aria-label="Отзывы">
+        <IconReviews />
+      </button>
+    </div>
+  );
+}
+
       </button>
     </header>
   );
