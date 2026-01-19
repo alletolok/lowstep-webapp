@@ -1,33 +1,40 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-import TopBar from "./components/TopBar/TopBar";
-import BottomTabBar from "./components/BottomTabBar/BottomTabBar";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-import Home from "./pages/Home";
-import Favorites from "./pages/Favorites";
-import Cart from "./pages/Cart";
-import Reviews from "./pages/Reviews";
-import Checkout from "./pages/Checkout";
+  padding: 10px 14px;
+  background: transparent;
+}
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <div className="appShell">
-        <TopBar />
+.topbar__profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-        <main className="appContent">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/checkout" element={<Checkout />} />
-          </Routes>
-        </main>
+  padding: 6px 14px;
+  border-radius: 999px;
 
-        <BottomTabBar />
-      </div>
-    </BrowserRouter>
-  );
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.topbar__profile img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.topbar__icon {
+  background: none;
+  border: none;
+  font-size: 18px;
+  opacity: 0.8;
 }
