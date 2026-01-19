@@ -1,13 +1,8 @@
-export type ProductSize = {
-  size: string;
-  available: boolean;
-};
-
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   price: number;
-  images: string[]; // URLs (https)
+  images: string[]; // пути к фото
   description: string;
-  sizes: ProductSize[];
+  sizes: number[];
 };
