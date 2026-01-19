@@ -1,5 +1,5 @@
 export type Product = {
-  id: number;
+  id: string;
   title: string;
   price: number;
   images: string[]; // пути к фото
