@@ -1,19 +1,17 @@
-// src/data/products.ts
-
 export type Product = {
   id: string;
   title: string;
   price: number;
   images: string[];
   sizes: number[];
+  description?: string; // optional чтобы билд не падал
 };
 
-// базовые товары
-const baseProducts: Product[] = [
+export const baseProducts: Product[] = [
   {
     id: "adidas-samba-og",
     title: "Adidas Samba OG",
-    price: 8990,
+    price: 15290,
     images: ["/products/AdidasSambaOG.png"],
     sizes: [40, 41, 42, 43, 44],
   },
@@ -32,7 +30,7 @@ const baseProducts: Product[] = [
   {
     id: "asics-gel-nyc",
     title: "ASICS GEL-NYC",
-    price: 13290,
+    price: 19290,
     images: [
       "/products/AsicsGEL-NYC.png",
       "/products/AsicsGEL-NYC(2).png",
@@ -43,7 +41,7 @@ const baseProducts: Product[] = [
   {
     id: "nike-zoom-vomero",
     title: "Nike Zoom Vomero",
-    price: 16290,
+    price: 20290,
     images: [
       "/products/NikeZoomVomero.png",
       "/products/NikeZoomVomero(3).png",
@@ -54,17 +52,16 @@ const baseProducts: Product[] = [
   {
     id: "nike-air-max-90",
     title: "Nike Air Max 90",
-    price: 15890,
+    price: 16290,
     images: ["/products/NikeAirMax90.png"],
     sizes: [40, 41, 42, 43, 44],
   },
 ];
 
-// 👉 дублируем для нормального скролла
-export const products: Product[] = Array.from({ length: 4 }).flatMap(
-  (_, i) =>
-    baseProducts.map((p) => ({
-      ...p,
-      id: ${p.id}-${i},
-    }))
+// дублируем для скролла
+export const products: Product[] = Array.from({ length: 4 }).flatMap((_, i) =>
+  baseProducts.map((p) => ({
+    ...p,
+    id: `${p.id}__${i + 1}`, // уникальный id, чтобы React не бесился
+  }))
 );
