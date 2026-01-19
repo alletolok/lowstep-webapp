@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -10,37 +10,23 @@ import Favorites from "./pages/Favorites";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Profile from "./pages/Profile";
+import Reviews from "./pages/Reviews";
 
-import type { TgUser } from "./utils/telegram";
-import { getTelegramUser, getTelegramWebApp } from "./utils/telegram";
-
-// ⚠️ МЕНЯЙ ЭТО ЧИСЛО КАЖДЫЙ РАЗ, КОГДА ХОЧЕШЬ ПРОВЕРИТЬ ЧТО ОБНОВИЛОСЬ
-const BUILD = "2026-01-19_10"; 
+import { getTelegramWebApp } from "./utils/telegram";
 
 export default function App() {
-  const [user, setUser] = useState<TgUser | null>(null);
-
   useEffect(() => {
     const tg = getTelegramWebApp();
-
-    console.log("BUILD:", BUILD);
-    console.log("TG:", tg);
-    console.log("initDataUnsafe.user:", tg?.initDataUnsafe?.user);
-
     try {
       tg?.ready?.();
       tg?.expand?.();
     } catch {}
-
-    setUser(getTelegramUser());
   }, []);
-
-  const topbarUser = useMemo(() => user, [user]);
 
   return (
     <BrowserRouter>
       <div className="appShell">
-        <TopBar user={topbarUser} />
+        <TopBar />
 
         <div className="appContent">
           <Routes>
@@ -49,25 +35,11 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/reviews" element={<Reviews />} />
           </Routes>
         </div>
 
         <BottomTabBar />
-
-        {/* Невидимый маркер версии, чтобы 100% видеть обновление */}
-        <div
-          style={{
-            position: "fixed",
-            left: 8,
-            bottom: 8,
-            fontSize: 11,
-            opacity: 0.35,
-            zIndex: 9999,
-            pointerEvents: "none",
-          }}
-        >
-          {BUILD}
-        </div>
       </div>
     </BrowserRouter>
   );

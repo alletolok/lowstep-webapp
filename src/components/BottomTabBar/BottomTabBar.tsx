@@ -1,10 +1,11 @@
 import "./BottomTabBar.css";
 import { NavLink } from "react-router-dom";
+import type { ReactNode } from "react";
 
 type Item = {
   to: string;
   label: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
 };
 
 function IconHome() {
@@ -64,11 +65,11 @@ function IconUser() {
 }
 
 const items: Item[] = [
-  { to: "/", label: "Home", icon: <IconHome /> },
-  { to: "/favorites", label: "Favorites", icon: <IconHeart /> },
-  { to: "/cart", label: "Cart", icon: <IconCart /> },
-  { to: "/checkout", label: "Checkout", icon: <IconCard /> },
-  { to: "/profile", label: "Profile", icon: <IconUser /> },
+  { to: "/", label: "Каталог", icon: <IconHome /> },
+  { to: "/favorites", label: "Избранное", icon: <IconHeart /> },
+  { to: "/cart", label: "Корзина", icon: <IconCart /> },
+  { to: "/checkout", label: "Оформление", icon: <IconCard /> },
+  { to: "/profile", label: "Профиль", icon: <IconUser /> },
 ];
 
 export default function BottomTabBar() {

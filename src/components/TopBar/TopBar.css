@@ -11,57 +11,53 @@
   right: 0;
   z-index: 50;
 
+  background: rgba(43, 43, 47, 0.22を見る /* чисто визуально */);
   background: rgba(43, 43, 47, 0.22);
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  transform: translateZ(0);
 }
 
-/* Центр всегда реально центр */
 .topbarCenter {
   flex: 1;
   display: flex;
   justify-content: center;
-  pointer-events: none; /* важно: чтобы центр не перекрывал клики по бокам */
 }
 
-/* Кнопки по бокам: меньше + более округлые */
 .topbarIconBtn {
   width: 40px;
   height: 40px;
   border: 0;
-  border-radius: 18px;
+  border-radius: 14px; /* чуть закруглённее и компактнее */
   background: rgba(255, 255, 255, 0.08);
   display: grid;
   place-items: center;
   color: rgba(255, 255, 255, 0.92);
   cursor: pointer;
-  pointer-events: auto;
 
-  transition: transform 160ms ease, background 160ms ease;
+  transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
 }
+
 .topbarIconBtn:active {
   transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.11);
 }
 
 .topbarIcon {
   width: 20px;
   height: 20px;
-  opacity: 0.95;
 }
 
-/* Узкая аккуратная капсула: только ава + ник, без лишней высоты */
+/* капсула (оставляем как концепт), внутри теперь только title */
 .topbarUserPill {
-  pointer-events: auto;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 
-  height: 36px;
-  padding: 0 12px;
+  padding: 0 14px;
+  height: 40px;
 
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -70,40 +66,16 @@
 
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   user-select: none;
+
+  max-width: 70vw;
 }
 
-/* Аватарка: круглая, аккуратная, меньше */
-.topbarAvatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-}
-
-.topbarAvatarImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.topbarAvatarFallback {
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 1;
-  opacity: 0.92;
-}
-
-/* Текст меньше, чтобы гармонично с авой */
 .topbarTitle {
+  font-size: 16px;
   font-weight: 700;
-  font-size: 15px;
   line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 220px;
 }
