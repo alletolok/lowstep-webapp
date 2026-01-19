@@ -1,86 +1,91 @@
-/* src/components/TopBar/TopBar.css */
-
 .topbar {
-  height: var(--topbar-h);
+  height: var(--topbar-h, 60px);
   padding: 10px 12px;
-
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 
-  background: rgba(20, 20, 24, 0.55);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+
+  background: rgba(43, 43, 47, 0.22);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.topbar__iconBtn {
-  width: 40px;
-  height: 40px;
-  border-radius: 14px;
+.topbarCenter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
 
+.topbarIconBtn {
+  width: 44px;
+  height: 44px;
   border: 0;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.92);
-
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
   display: grid;
   place-items: center;
-
-  cursor: pointer;
-}
-
-.topbar__profilePill {
-  flex: 0 1 auto;
-  min-width: 0;
-
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.92);
-
-  max-width: 260px; /* вот тут фикс “не на всю ширину” */
-  margin: 0 auto;   /* центрируем */
 }
 
-.topbar__avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  overflow: hidden;
+.topbarIcon {
+  width: 22px;
+  height: 22px;
+}
 
-  background: rgba(255, 255, 255, 0.12);
-  position: relative;
+/* 🔒 ПИЛЮЛЯ: ширина = контент, всегда по центру */
+.topbarUserPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 12px;
+  height: 40px;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  user-select: none;
+}
+
+/* ✅ РЕАЛЬНО МЕНЬШАЯ И ЛЁГКАЯ АВАТАРКА */
+.topbarAvatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
   flex: 0 0 auto;
 }
 
-.topbar__avatar img {
+.topbarAvatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.topbar__avatarLetter {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 12px;
+.topbarAvatar span {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
   opacity: 0.9;
 }
 
-.topbar__name {
-  font-weight: 650;
-  font-size: 14px;
+.topbarTitle {
+  font-size: 17px;
+  font-weight: 700;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  min-width: 0;
+  line-height: 1;
 }

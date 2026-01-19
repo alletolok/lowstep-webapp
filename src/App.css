@@ -6,9 +6,13 @@
   --card: rgba(255, 255, 255, 0.06);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
@@ -27,11 +31,15 @@ body {
   flex-direction: column;
 }
 
+/* Контент между фиксированным TopBar и фиксированным TabBar */
 .appContent {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  /* topbar теперь НЕ fixed — поэтому padding-top не нужен */
-  padding-bottom: var(--tabbar-h);
+  /* TopBar fixed -> обязательно */
+  padding-top: var(--topbar-h);
+
+  /* TabBar fixed -> учитываем safe-area снизу */
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
 }
