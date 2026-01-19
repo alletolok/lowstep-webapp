@@ -16,9 +16,10 @@ function getTitle(user: TgUser | null) {
 
 function getInitial(user: TgUser | null) {
   const base =
-    (user?.first_name?.trim() ||
-      user?.username?.trim() ||
-      "A").trim();
+    user?.first_name?.trim() ||
+    user?.username?.trim() ||
+    "A";
+
   return base.charAt(0).toUpperCase();
 }
 
@@ -28,6 +29,7 @@ export default function TopBar({ user }: Props) {
 
   return (
     <header className="topbar">
+      {/* левая кнопка */}
       <button className="topbarIconBtn" type="button" aria-label="Support">
         <svg viewBox="0 0 24 24" className="topbarIcon">
           <path
@@ -37,6 +39,7 @@ export default function TopBar({ user }: Props) {
         </svg>
       </button>
 
+      {/* центр */}
       <div className="topbarCenter">
         <div className="topbarUserPill">
           <div className="topbarAvatar">
@@ -47,11 +50,12 @@ export default function TopBar({ user }: Props) {
             )}
           </div>
 
-          <span className="topbarTitle">{title}</span>
+          <div className="topbarTitle">{title}</div>
         </div>
       </div>
 
-      <button className="topbarIconBtn" type="button" aria-label="Reviews">
+      {/* правая кнопка */}
+      <button className="topbarIconBtn" type="button" aria-label="Favorites">
         <svg viewBox="0 0 24 24" className="topbarIcon">
           <path
             d="M12 17.3 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21 12 17.3Z"
@@ -62,4 +66,3 @@ export default function TopBar({ user }: Props) {
     </header>
   );
 }
-

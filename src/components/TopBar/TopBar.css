@@ -1,5 +1,5 @@
 .topbar {
-  height: var(--topbar-h, 60px);
+  height: 60px;
   padding: 10px 12px;
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
 .topbarIconBtn {
   width: 44px;
   height: 44px;
-  border: 0;
+  border: none;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   display: grid;
@@ -40,16 +40,15 @@
   height: 22px;
 }
 
-/* 🔒 ПИЛЮЛЯ: ширина = контент, всегда по центру */
+/* пилюля */
 .topbarUserPill {
+  height: 44px;
+  padding: 0 14px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 
-  padding: 0 12px;
-  height: 40px;
-
-  border-radius: 999px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -58,16 +57,18 @@
   user-select: none;
 }
 
-/* ✅ РЕАЛЬНО МЕНЬШАЯ И ЛЁГКАЯ АВАТАРКА */
+/* 🔥 АВАТАР — СТАЛ МЯГЧЕ */
 .topbarAvatar {
-  width: 16px;
-  height: 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+  width: 28px;
+  height: 28px;
+
+  border-radius: 12px; /* ⬅️ было 999px, теперь мягкий rounded-square */
+  background: rgba(255, 255, 255, 0.16);
+
   display: grid;
   place-items: center;
   overflow: hidden;
-  flex: 0 0 auto;
+  flex-shrink: 0;
 }
 
 .topbarAvatar img {
@@ -77,15 +78,17 @@
 }
 
 .topbarAvatar span {
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1;
   opacity: 0.9;
 }
 
+/* текст */
 .topbarTitle {
-  font-size: 17px;
-  font-weight: 700;
-  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1;
+  white-space: nowrap;
+  opacity: 0.9;
 }
