@@ -1,40 +1,33 @@
-import { useEffect, useState } from 'react';
-import TopBar from './components/TopBar/TopBar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Cart from "./pages/Cart/Cart";
+import Favorites from "./pages/Favorites/Favorites";
+import Payment from "./pages/Payment/Payment";
+import Profile from "./pages/Profile/Profile";
+import Product from "./pages/Product/Product";
 
-type TgUser = {
-  id?: number;
-  first_name?: string;
-  username?: string;
-  photo_url?: string;
-};
+import BottomNav from "./components/BottomNav/BottomNav";
+import TopBar from "./components/TopBar/TopBar";
 
-function App() {
-  const [user, setUser] = useState<TgUser | null>(null);
+import "./App.css";
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const tg = (window as any)?.Telegram?.WebApp;
-    if (!tg) return;
-
-    const tgUser = tg.initDataUnsafe?.user;
-
-    if (tgUser) {
-      setUser({
-        id: tgUser.id,
-        first_name: tgUser.first_name,
-        username: tgUser.username,
-        photo_url: tgUser.photo_url,
-      });
-    }
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <TopBar user={user} />
-      {/* остальной UI */}
-    </>
+    <Router>
+      <TopBar />
+
+      <main className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/product/:id" element={<Product />} />
+        </Routes>
+      </main>
+
+      <BottomNav />
+    </Router>
   );
 }
-
-export default App;
