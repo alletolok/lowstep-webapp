@@ -1,16 +1,18 @@
+// src/data/products.ts
+
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   price: number;
   images: string[];
-  siles: number[]
+  sizes: number[];
 };
-    
+
 export const baseProducts: Product[] = [
   {
     id: 1,
     title: "Adidas Samba OG",
-    price: 8990,
+    price: 14290,
     images: ["/products/AdidasSambaOG.png"],
     sizes: [40, 41, 42, 43, 44],
   },
@@ -28,43 +30,40 @@ export const baseProducts: Product[] = [
   },
   {
     id: 3,
-    title: "Asics GEL-NYC",
-    price: 12990,
+    title: "ASICS GEL-NYC",
+    price: 19290,
     images: [
       "/products/AsicsGEL-NYC.png",
       "/products/AsicsGEL-NYC(2).png",
       "/products/AsicsGEL-NYC(3).png",
     ],
-    sizes: [40, 41, 42, 43],
+    sizes: [40, 41, 42, 43, 44],
   },
   {
     id: 4,
-    title: "Nike Zoom Vomero",
-    price: 13990,
+    title: "Nike Zoom Vomero 5",
+    price: 20290,
     images: [
       "/products/NikeZoomVomero.png",
-      "/products/NikeZoomVomero(2).png",
       "/products/NikeZoomVomero(3).png",
+      "/products/NikeZoomVomero(2).png",
     ],
-    sizes: [41, 42, 43, 44],
+    sizes: [40, 41, 42, 43, 44],
   },
   {
     id: 5,
     title: "Nike Air Max 90",
-    price: 11990,
+    price: 15890,
     images: ["/products/NikeAirMax90.png"],
     sizes: [40, 41, 42, 43, 44],
   },
 ];
 
-export const products: Product[] = [
-  ...baseProducts,
-  ...baseProducts.map(p => ({ ...p, id: p.id + 100 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 200 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 300 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 400 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 500 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 600 })),
-  ...baseProducts.map(p => ({ ...p, id: p.id + 700 })),
-];
-
+// Дублируем для нормального скролла (4 раза)
+// + делаем уникальные id, чтобы React не ругался на ключи
+export const products: Product[] = Array.from({ length: 4 }).flatMap((_, batch) =>
+  baseProducts.map((p) => ({
+    ...p,
+    id: p.id + batch * 1000,
+  }))
+);
