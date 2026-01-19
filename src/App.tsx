@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import TopBar from "./components/TopBar/TopBar";
@@ -19,20 +19,24 @@ export default function App() {
 
   useEffect(() => {
     const tg = getTelegramWebApp();
+
     try {
       tg?.ready?.();
       tg?.expand?.();
     } catch {}
 
+    // 1) первичная попытка
     setUser(getTelegramUser());
+
+    // 2) на всякий: iOS/Telegram иногда “догружает” user чуть позже
+    const t = setTimeout(() => setUser(getTelegramUser()), 250);
+    return () => clearTimeout(t);
   }, []);
 
-  const topbarUser = useMemo(() => user, [user]);
-
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="appShell">
-        <TopBar user={topbarUser} />
+        <TopBar user={user} />
 
         <div className="appContent">
           <Routes>
@@ -46,6 +50,6 @@ export default function App() {
 
         <BottomTabBar />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
