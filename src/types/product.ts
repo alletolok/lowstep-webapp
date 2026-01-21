@@ -1,8 +1,9 @@
+// src/types/product.ts
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   price: number;
-  images: string[]; // пути к фото
-  description: string;
+  images: string[];
   sizes: number[];
+  description?: string;
 };

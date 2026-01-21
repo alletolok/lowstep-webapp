@@ -1,0 +1,45 @@
+.simplePage {
+  padding: 18px;
+  padding-top: 14px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.centerEmpty {
+  min-height: 55vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.primaryBtn {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #ff3b30;
+  color: white;
+}
+
+.grid2 {
+  display: grid;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 641px) {
+  .grid2 {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+}

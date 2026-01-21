@@ -1,9 +1,11 @@
-import "./Reviews.css";
+import "./SimplePage.css";
 
 export default function Reviews() {
   return (
-    <div className="reviewsEmpty">
-      <div className="reviewsEmptyText">Отзывов пока нет</div>
+    <div className="simplePage">
+      <div className="centerEmpty">
+        <div className="emptyTitle">Отзывов пока нет</div>
+      </div>
     </div>
   );
 }

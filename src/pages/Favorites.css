@@ -1,91 +1,71 @@
 .favPage {
-  width: 100%;
-  padding: 14px 14px 110px; /* снизу запас под капсулу таббара */
-  box-sizing: border-box;
+  padding: 14px 16px 90px;
 }
 
 .favEmpty {
-  min-height: calc(100vh - 220px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.favEmptyText {
-  opacity: 0.75;
+  height: calc(100dvh - 160px);
+  display: grid;
+  place-items: center;
+  opacity: 0.7;
   font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
 }
 
 .favList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 .favRow {
+  width: 100%;
   display: flex;
-  align-items: stretch;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+  border-radius: 18px;
 
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 18px;
-  padding: 10px;
-  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
-  transition: transform 180ms ease, opacity 180ms ease;
-}
-
-.favRow.isRemoving {
-  opacity: 0;
-  transform: scale(0.98);
-}
-
-.favRowMain {
-  flex: 1;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-
-  background: transparent;
-  border: 0;
-  padding: 0;
-  text-align: left;
-  color: inherit;
   cursor: pointer;
 }
 
 .favImgWrap {
-  width: 82px;
-  height: 62px;
-  border-radius: 14px;
+  width: 86px;
+  height: 86px;
+  border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.18);
   flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  display: grid;
+  place-items: center;
 }
 
 .favImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
 .favInfo {
+  min-width: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-width: 0;
 }
 
 .favTitle {
   font-size: 15px;
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 650;
+  line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,33 +73,43 @@
 
 .favPrice {
   font-size: 14px;
-  font-weight: 600;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
-.favRemoveBtn {
-  width: 42px;
-  border-radius: 14px;
-  border: 0;
-  cursor: pointer;
-
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.8);
-
+.favActions {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  transition: transform 160ms ease, background 160ms ease;
+  gap: 10px;
+  flex: 0 0 auto;
 }
 
-.favRemoveBtn:active {
-  transform: scale(0.96);
+.favCartBtn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
 }
 
-.favTrashIcon {
-  width: 18px;
-  height: 18px;
-  display: block;
+.favHeartBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.favHeartBtn.isOn {
+  color: #ff3b30;
+}
+
+@media (max-width: 420px) {
+  .favCartBtn {
+    display: none; /* на прям маленьких экранах оставим только сердце, чтобы не было каши */
+  }
 }

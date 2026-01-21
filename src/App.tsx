@@ -1,9 +1,5 @@
-import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-
-import TopBar from "./components/TopBar/TopBar";
-import BottomTabBar from "./components/BottomTabBar/BottomTabBar";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
@@ -11,36 +7,40 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Profile from "./pages/Profile";
 import Reviews from "./pages/Reviews";
+import ProductPage from "./pages/Product";
 
-import { getTelegramWebApp } from "./utils/telegram";
+import TopBar from "./components/TopBar/TopBar";
+import BottomTabBar from "./components/BottomTabBar/BottomTabBar";
 
-export default function App() {
-  useEffect(() => {
-    const tg = getTelegramWebApp();
-    try {
-      tg?.ready?.();
-      tg?.expand?.();
-    } catch {}
-  }, []);
+function AppShell() {
+  const location = useLocation();
+  const hideBottomBar = location.pathname.startsWith("/product/");
 
   return (
-    <BrowserRouter>
-      <div className="appShell">
-        <TopBar />
+    <div className="appShell">
+      <TopBar />
 
-        <div className="appContent">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/reviews" element={<Reviews />} />
-          </Routes>
-        </div>
-
-        <BottomTabBar />
+      <div className="appContent">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+        </Routes>
       </div>
+
+      {!hideBottomBar && <BottomTabBar />}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppShell />
     </BrowserRouter>
   );
 }

@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      {/* Sticky search (оставляем твою идеальную кнопку/инпут) */}
+      {/* Sticky search */}
       <div className="home__searchBar">
         <div className="home__searchInner">
           <span className="home__searchIcon">⌕</span>
